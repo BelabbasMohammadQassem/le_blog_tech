@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Article
+from .models import Article, Category
 from django.shortcuts import render, get_object_or_404, redirect
 
 
@@ -33,3 +33,11 @@ def search_articles(request):
             'error': "Veuillez entrer au moins 3 caractères pour effectuer une recherche."
         })
 
+def articles_by_category(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    articles = Article.objects.filter(categorie=category).order_by('-pub_date')
+    return render(request, 'polls/articles_by_category.html', {
+        'category': category,
+        'articles': articles
+    }
+    )

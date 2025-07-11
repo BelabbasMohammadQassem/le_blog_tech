@@ -11,3 +11,4 @@ class Article(models.Model):
     author = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")
     categorie = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    image = models.ImageField(upload_to='articles_images/', blank=True, null=True)
